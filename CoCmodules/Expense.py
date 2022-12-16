@@ -1,5 +1,4 @@
-def expense_calculation():
-    expense = {
+expense = {
         'Tax': '150',
         'Insurance': '100',
         'Electric': '0',
@@ -14,9 +13,23 @@ def expense_calculation():
         'Property Management': '200',
         'Mortgage': '860'
     }
+total = 0.0
+def expense_calculation():
+    
 
-    total = 0.0
-    for value in income.values():
+    global total
+    for value in expense.values():
         # value = input(f"How much income from {value}?")
         total += float(value)
+    return total
+
+def expense_modifier(key, money):
+    global total
+    
+    if key in expense:
+        total -= expense.get(key)
+        expense[key] = money
+        total += float(money)
+    else:
+        print("Please input the expense value you wish to change: ")
     return total
