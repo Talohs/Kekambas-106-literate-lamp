@@ -1,28 +1,43 @@
+import re
+
 total = 0.0
 return_on_invest = {
-        'Down Payment': '40000',
-        'Closing Costs': '3000',
-        'Rehab budget': '7000',
-        'Miscellaneous': '0',
-        'Total Investment': '50000'
+        'down payment': '0',
+        'closing costs': '0',
+        'rehab budget': '0',
+        'miscellaneous': '0',
     } 
 
 def roi_calculation():
 
     global total
-    total
-    for value in return_on_invest.values():
-        # value = input(f"How much income from {value}?")
-        total += float(value)
+    flag = True
+    for inv, value in return_on_invest.items():
+        value = input(f"How much investment from {inv}?")
+        try:
+            float(value)
+        except:
+            flag = False
+        if flag:
+            total += float(value)
+        else:
+            while True:
+                value = re.sub(r'[0-9,46]','', value)
+                try:
+                    float(value)
+                except:
+                    value = input("Please input the income numeric value you wish to change: ")
+                    continue
+                else:
+                    break
+            total += float(value)
     return total
 
 def roi_modifier(key, money):
     global total
     
-    if key in return_on_invest:
-        total -= return_on_invest.get(key)
-        return_on_invest[key] = money
-        total += float(money)
-    else:
-        print("Please input the investment value you wish to change: ")
+    total -= return_on_invest.get(key)
+    return_on_invest[key] = money
+    total += float(money)
+    
     return total
