@@ -36,7 +36,7 @@ def roi_calculation():
 def roi_modifier(key, money):
     global total
     
-    total -= return_on_invest.get(key)
+    total -= float(return_on_invest.get(key))
     return_on_invest[key] = money
     total += float(money)
     

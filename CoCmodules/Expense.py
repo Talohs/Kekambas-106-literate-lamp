@@ -45,7 +45,7 @@ def expense_calculation():
 def expense_modifier(key, money):
     global total
     
-    total -= expense.get(key)
+    total -= float(expense.get(key))
     expense[key] = money
     total += float(money)
 
